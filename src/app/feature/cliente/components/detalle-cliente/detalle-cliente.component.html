@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="container text-left">
+    <h4 class="card-title">
+      <a [routerLink]="['/home']" class="btn btn-light btn-xs">&laquo; volver</a>
+    </h4>
+    <h1>Detalle del cliente</h1>
+    <div class="card mt-2" style="width: 18rem;">
+      <div class="card-header">
+        Cliente
+      </div>
+      <ul *ngIf="cliente" class="list-group list-group-flush">
+        <li class="list-group-item">{{cliente.nombre}}</li>
+        <li class="list-group-item">{{cliente.apellido}}</li>
+        <li class="list-group-item">{{cliente.email}}</li>
+        <li class="list-group-item">{{cliente.fechaNacimiento | date:"fullDate"}}</li>
+      </ul>
+    </div>
+
+
+    <div class="row col-sm-1 mt-2">
+      <button type="button" class="btn btn-success btn-sm" [routerLink]="['/compra', cliente.id, 'crear']">crear
+        compra</button>
+    </div>
+
+    <div class="row">
+      <div class="alert alert-info my-4 col-sm-6" *ngIf="listaCompras.length == 0">
+        No hay facturas asignadas para el cliente {{cliente.nombre}} {{cliente.apellido}}
+      </div>
+
+      <table class="table table-bordered table-striped my-4" *ngIf="listaCompras.length > 0">
+        <thead>
+          <tr>
+            <th>identificador</th>
+            <th>descripción</th>
+            <th>fecha</th>
+            <th>total</th>
+            <th>detalle</th>
+            <th>eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let compra of listaCompras">
+            <td>{{compra.identificadorCompra}}</td>
+            <td>{{compra.descripcion}}</td>
+            <td>{{compra.fechaCompra}}</td>
+            <td>{{compra.valorTotalCompra}}</td>
+            <td><button class="btn btn-primary btn-sm" type="button"
+                [routerLink]="['/compra', compra.identificadorCompra, 'detalle']">ver</button></td>
+            <td><button class="btn btn-danger btn-sm" type="button" (click)="delete(compra)">eliminar</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

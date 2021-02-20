@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="card bg-light" *ngIf="compra">
+        <div class="card-header">Compra: {{compra.descripcion}}</div>
+        <div class="card-body">
+            <h4 class="card-title">
+                <a [routerLink]="['/home']" class="btn btn-light btn-xs">&laquo; volver</a>
+            </h4>
+
+            <ul class="list-group my-2">
+                <li class="list-group-item list-group-item-primary">Datos del cliente</li>
+                <li class="list-group-item">{{cliente.nombre}}</li>
+                <li class="list-group-item">{{cliente.apellido}}</li>
+            </ul>
+
+            <ul class="list-group my-2">
+                <li class="list-group-item list-group-item-primary">Datos de la factura</li>
+                <li class="list-group-item">Identificador compra: {{compra.identificadorCompra}}</li>
+                <li class="list-group-item">Descripción: {{compra.descripcion}}</li>
+                <li class="list-group-item">Fecha: {{compra.fechaCompra}}</li>
+            </ul>
+
+            <table class="table table-striped table-hover table-bordered my-3">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let detalle of listaDetalles">
+                        <td>{{detalle.nombreProducto}}</td>
+                        <td>{{detalle.precio}}</td>
+                        <td>{{detalle.cantidad}}</td>
+                        <td>{{calcularValorDetalle(detalle.cantidad,detalle.precio)}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="float-right">
+                <h3 class="text-right" *ngIf="listaDetalles.length > 0">Descuento: <span>{{compra.descuento * 100}}</span></h3>
+                <h3 class="text-right" *ngIf="listaDetalles.length > 0">valor total compra: <span>{{compra.valorTotalCompra}}</span></h3>
+              </div>
+
+        </div>
+    </div>
+</div>
