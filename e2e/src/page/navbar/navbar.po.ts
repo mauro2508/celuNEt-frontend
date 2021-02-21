@@ -7,4 +7,8 @@ export class NavbarPage {
     async clickBotonProductos() {
         await this.linkProducto.click();
     }
+
+    async clickBotonHome(){
+        await this.linkHome.click();
+    }
 }
