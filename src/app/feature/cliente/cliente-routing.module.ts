@@ -19,13 +19,13 @@ const routes: Routes = [
       {
         path: ':id/detalle',
         component: DetalleClienteComponent
-      }
-      /*
+      },
+      
       {
-        path: 'borrar',
-        component: BorrarProductoComponent
+        path: ':id/editar',
+        component: CrearClienteComponent
       }
-      */
+      
       
     ]
   }

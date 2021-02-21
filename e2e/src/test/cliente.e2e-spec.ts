@@ -1,16 +1,19 @@
 import { NavbarPage } from '../page/navbar/navbar.po';
 import { AppPage } from '../app.po';
 import { ClientePage } from '../page/cliente/cliente.po';
+import { HomePage } from '../page/home/home.po';
 
 describe('workspace-project Cliente', () => {
     let page: AppPage;
     let navBar: NavbarPage;
     let cliente:ClientePage;
+    let home: HomePage;
 
     beforeEach(() => {
         page = new AppPage();
         navBar = new NavbarPage();
         cliente = new ClientePage();
+        home = new HomePage();
     });
 
     it('Deberia crear un cliente', () => {
@@ -22,27 +25,22 @@ describe('workspace-project Cliente', () => {
         const FECHA_NACIMIENTO = '02-20-2021';
 
         navBar.clickBotonHome();
-        const cantidadClientes = cliente.contarClientes();
+        const cantidadClientes = home.contarClientes();
         console.log(cantidadClientes);
-        cliente.clickBotonCrearCliente();
+        home.clickBotonCrearCliente();
 
         cliente.ingresarNombre(NOMBRE);
         cliente.ingresarApellido(APELLIDO);
         cliente.ingresarEmail(EMAIL);
         cliente.ingresarFechaNacimiento(FECHA_NACIMIENTO);
         cliente.clickBotonCrearClienteForm();
-        expect(cliente.contarClientes()).toBeGreaterThan(cantidadClientes);
+        expect(home.contarClientes()).toBeGreaterThan(cantidadClientes);
     });
 
-    it('Deberia listar los clientes', async () => {
-        const cantidadClientesAntes = await cliente.contarClientes();
-        expect(cantidadClientesAntes).toBe(cliente.contarClientes());
+    it('Deberia listar los clientes', () => {
+        const cantidadClientesAntes = home.contarClientes();
+        expect(cantidadClientesAntes).toBe(home.contarClientes());
         expect(cantidadClientesAntes).toBeGreaterThan(0);
     });
-
-    it('Deberia listar los clientes 2', () => {
-        const cantidadClientesAntes = cliente.contarClientes();
-        expect(cantidadClientesAntes).toBe(cliente.contarClientes());
-        expect(cantidadClientesAntes).toBeGreaterThan(0);
-    });
+    
 });

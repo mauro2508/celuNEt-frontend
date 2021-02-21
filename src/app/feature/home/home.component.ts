@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Cliente } from '@cliente/shared/model/cliente';
 import { ClienteService } from '@cliente/shared/service/cliente.service';
 import { ModalService } from '@cliente/shared/service/modal.service';
-
+import swal from 'sweetalert2';
 
 
 @Component({
@@ -28,13 +28,12 @@ export class HomeComponent implements OnInit {
     
   }
 
-  abrirModal(cliente: Cliente){
-    this.clienteSeleccionado = cliente;
-    this.modalService.abrirModal();
-    alert("oe abri2 " + this.modalService.modal );
-
-    
+  eliminar(cliente:Cliente){
+    this.clienteService.eliminar(cliente).subscribe(
+      () =>{
+        swal.fire("Cliente:", `${cliente.nombre} actualizado con éxito!`, 'success');
+        this.clientes = this.clientes.filter(c => c.id!== cliente.id);
+      }
+    );
   }
-
-
 }
